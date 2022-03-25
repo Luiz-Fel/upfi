@@ -34,6 +34,8 @@ export function CardList({ cards }: CardsProps): JSX.Element {
     }
   }
 
+  console.log(cards)
+ 
   return (
     <>
       {/* TODO CARD GRID */}
@@ -43,9 +45,10 @@ export function CardList({ cards }: CardsProps): JSX.Element {
       >
 
         { cards.map((card) => {
+          const data = card
           return(
             <Card 
-            data={card} 
+            data={data} 
             viewImage={handleViewImage} 
             />
             )

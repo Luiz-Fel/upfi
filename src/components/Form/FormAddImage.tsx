@@ -7,6 +7,13 @@ import { api } from '../../services/api';
 import { FileInput } from '../Input/FileInput';
 import { TextInput } from '../Input/TextInput';
 
+
+interface FormAddImageData {
+  title: string;
+  description: string;
+  image: unknown;
+}
+
 interface FormAddImageProps {
   closeModal: () => void;
 }
@@ -45,11 +52,12 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
     },
   };
 
+  const url = imageUrl
   const queryClient = useQueryClient();
   const mutation = useMutation(
     // TODO MUTATION API POST REQUEST,
      formData => {
-      return  api.post('api/images', formData)
+      return  api.post('/api/images', {...formData, url})
     },  
 
     {
@@ -70,7 +78,7 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
   } = useForm();
   const { errors } = formState;
 
-  const onSubmit = async (data: Record<string, unknown>): Promise<void> => {
+  const onSubmit = async (data: FormAddImageData): Promise<void> => {
     try {
       // TODO SHOW ERROR TOAST IF IMAGE URL DOES NOT EXISTS
       console.log(data)
@@ -88,9 +96,10 @@ export function FormAddImage({ closeModal }: FormAddImageProps): JSX.Element {
       }
 
 
+
       // TODO EXECUTE ASYNC MUTATION
 
-      await mutation.mutateAsync()
+      await mutation.mutateAsync({...data} as unknown as void)
 
       // TODO SHOW SUCCESS TOAST
 

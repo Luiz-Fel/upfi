@@ -46,7 +46,7 @@ export function ModalViewImage({
         paddingTop='0.25rem'
         >
           <Link href={imgUrl} isExternal fontSize='0.8rem'>
-            <p>Abrir original</p>
+            Abrir original
           </Link>
         </ModalFooter>
         </ModalContent>

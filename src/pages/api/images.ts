@@ -2,7 +2,9 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import fauna from 'faunadb';
 
 const { query } = fauna;
-const client = new fauna.Client({ secret: process.env.FAUNA_API_KEY });
+const client = new fauna.Client({ 
+  secret: process.env.FAUNA_API_KEY,
+ });
 
 interface ImagesQueryResponse {
   after?: {
@@ -25,6 +27,8 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<void> {
+
+
   if (req.method === 'POST') {
     const { url, title, description } = req.body;
 
